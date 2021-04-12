@@ -151,8 +151,8 @@ function muestraVehiculo(pallet,kg) {
         `
               <div class='card shadow-sm'>
               <h2>Vehiculo Ofrecido</h2>
-              <p class="alert alert-danger mt-3" role="alert">La cantidad de pallets debe ser mayor a <b>0</b> o menor que <b>9</b>.</p>
-              <p class="alert alert-danger mt-3" role="alert">La cantidad Kg debe ser mayor a <b>0</b> o menor que <b>15.000</b>.</p>
+              <p class="alert alert-danger mt-3" role="alert">La cantidad de pallets debe ser mayor a <b>0</b> o menor o igual a <b>8</b>.</p>
+              <p class="alert alert-danger mt-3" role="alert">La cantidad Kg debe ser mayor a <b>0</b> o menor que <b>5.000</b>.</p>
               <div class="text-center p-2">
               <button id="botonVolver" class="btn btn-primary text-center mt-4">Volver</button>
               </div>
