@@ -177,8 +177,8 @@ function muestraVehiculo(pallet,kg) {
             $("#presupuesto").show(1000);
             $("#gracias").hide(0);
             calculoDistencia();
+            diasAlmacenado()
             muestraPresupuesto();
-            
       });
   })};
 
@@ -192,9 +192,10 @@ let pPallet = JSON.parse(localStorage.getItem("vehiculoOfrecido"));
 let precioPallet = pPallet.precioPallet;
 
 let km = JSON.parse(localStorage.getItem("distancia"));
-
 let pKm = JSON.parse(localStorage.getItem("vehiculoOfrecido"));
 let precioKm = pKm.precioKm;
+
+let dias = JSON.parse(localStorage.getItem("diasAlmacenado"));
 
 $("#presupuesto").html(
 `
@@ -225,10 +226,16 @@ $("#presupuesto").html(
       <td>$${km*precioKm}</td>
     </tr>
     <tr>
+      <th scope="row">Dias Almacenado<br> por pallet</th>
+      <td>${dias}</td>
+      <td>${1000}</td>
+      <td>$${dias*1000*pallet}</td>
+    </tr>
+    <tr>
     <th scope="row">TOTAL</th>
     <td></td>
     <td></td>
-    <td><b>$${km*precioKm+pallet*precioPallet}</b></td>
+    <td><b>$${km*precioKm+pallet*precioPallet+dias*1000*pallet}</b></td>
   </tr>
   </tbody>
 </table>
@@ -382,4 +389,12 @@ function enviarDatos(datos, url){
           }
   });
 }
+}
+
+
+function diasAlmacenado() {
+  let fecha1 = moment(JSON.parse(localStorage.getItem("fechaOrigen")));
+  let fecha2 = moment(JSON.parse(localStorage.getItem("fechaDestino")));
+  let dias = (fecha2.diff(fecha1, 'days'));
+  localStorage.setItem("diasAlmacenado",JSON.stringify(dias));
 }
