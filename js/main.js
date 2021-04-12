@@ -112,7 +112,7 @@ function muestraVehiculo(pallet,kg) {
       let precioPal = vehiculoOfrecido.precioPallet;
       let precioKm = vehiculoOfrecido.precioKm;
       let nombre = JSON.parse(localStorage.getItem("nombreOrigen"));
-      console.log(nombre);
+      
 
       $("#mostrarVehiculo").html(
         `
@@ -192,7 +192,7 @@ let pPallet = JSON.parse(localStorage.getItem("vehiculoOfrecido"));
 let precioPallet = pPallet.precioPallet;
 
 let km = JSON.parse(localStorage.getItem("distancia"));
-console.log(km);
+
 let pKm = JSON.parse(localStorage.getItem("vehiculoOfrecido"));
 let precioKm = pKm.precioKm;
 
@@ -277,17 +277,12 @@ function guardaCoorCP1(cp1){
   }
 
   const loc1 = GEO.find(geo1 => (geo1.cp == cp));
-  // console.log(loc1);
-  //console.log(ubicacion);
   localStorage.setItem("origen",JSON.stringify(loc1));
   let origen1 = JSON.parse(localStorage.getItem("origen"));
-  //console.log(origen1);
   let lat1   = JSON.parse(origen1.latitud);
   localStorage.setItem("lat1",JSON.stringify(origen1.latitud));
-  // console.log(lat1);
   let lon1 = JSON.parse(origen1.longitud);
   localStorage.setItem("lon1",JSON.stringify(origen1.longitud));
-  // console.log(lon1);
 }
 
 function guardaCoorCP2(cp2){
@@ -297,17 +292,13 @@ function guardaCoorCP2(cp2){
   }
 
   const loc2 = GEO.find(geo2 => (geo2.cp == cp));
-  console.log(loc2);
-  //console.log(ubicacion);
+  
   localStorage.setItem("destino",JSON.stringify(loc2));
   let destino2 = JSON.parse(localStorage.getItem("destino"));
-  //console.log(origen1);
   let lat2   = JSON.parse(destino2.latitud);
   localStorage.setItem("lat2",JSON.stringify(destino2.latitud));
-  // console.log(lat2);
   let lon2 = JSON.parse(destino2.longitud);
   localStorage.setItem("lon2",JSON.stringify(destino2.longitud));
-  // console.log(lon2);
 }
 
 function calculoDistencia() {
@@ -317,10 +308,10 @@ var lat1 = JSON.parse(localStorage.getItem("lat1"));
 var lon1 = JSON.parse(localStorage.getItem("lon1"));
 var lat2 = JSON.parse(localStorage.getItem("lat2"));
 var lon2 = JSON.parse(localStorage.getItem("lon2"));
-console.log(lat1);
-console.log(lon1);
-console.log(lat2);
-console.log(lon2);
+
+
+
+
 
 function getDistanciaMetros(lat1,lon1,lat2,lon2){
     rad = function(x) {return x*Math.PI/180;}
@@ -333,13 +324,13 @@ function getDistanciaMetros(lat1,lon1,lat2,lon2){
   
   //Aca obtienes la distancia en metros por la conversion 1Km =1000m
     var d = R * c;
-    console.log(d);
+    
     
     return ( d .toFixed(2) ); 
   }
   
   let distancia = getDistanciaMetros(lat1,lon1,lat2,lon2)
-  console.log(distancia);
+  
 
   localStorage.setItem("distancia",JSON.stringify(distancia));
  
@@ -376,7 +367,6 @@ function enviarDatos(datos, url){
           url: url,
           type: 'post',
           success:  function (response) {
-              //console.log(response); // Imprimir respuesta del archivo
               $(informePost).append(`
               <div class="alert alert-success text-center" role="alert">
                   <strong>Bien hecho!</strong> Pedido Nro: ${response.id}.
@@ -384,7 +374,11 @@ function enviarDatos(datos, url){
               `);
           },
           error: function (error) {
-              console.log(error); // Imprimir respuesta de error
+            $(informePost).append(`
+            <div class="alert alert-danger text-center" role="alert">
+                <strong>Bien hecho!</strong> Pedido Nro: ${response.id}.
+            </div>
+            `);    
           }
   });
 }
