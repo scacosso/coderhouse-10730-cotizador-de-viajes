@@ -6,7 +6,7 @@ $(document).ready(function () {
     $("#presupuesto").hide(0);
     $("#gracias").hide(0);
     localStorage.clear();
-    postViaje()
+
 });
 
 
@@ -40,7 +40,7 @@ $("#botonADestino").click(function(event) {
       $("#presupuesto").hide(0);
       $("#gracias").hide(0);
 
-    // ENVIO DATOS DE FORMULARIO A STORAGE // 
+  // ENVIO DATOS DE FORMULARIO A STORAGE // 
       localStorage.setItem("nombreOrigen",JSON.stringify($("#nombreOrigen").val()));
       localStorage.setItem("mailOrigen",JSON.stringify($("#mailOrigen").val()));
       localStorage.setItem("pallet",JSON.stringify($("#pallet").val()));
@@ -250,6 +250,7 @@ $("#botonConfirmado").click(function(event) {
       $("#mostrarVehiculo").hide(0);
       $("#presupuesto").hide(0);
       $("#gracias").show(1000);
+      postViaje();
 });
 }
 
@@ -263,7 +264,8 @@ $("#gracias").html(
   <h2 class="text-center text-secondary">Confirmado</h2>
   <div class="text-center">
     <img class="" src="img/622b1cde2dcc0133175c769f7e53b9e2.png" alt="Confirmado">
-  </div>  
+  </div>
+  <div id="informePost"> </div>  
 </div>
 </div>
 `);
@@ -346,8 +348,46 @@ function getDistanciaMetros(lat1,lon1,lat2,lon2){
 }
 
 
-function postViaje() {
-const URL = "https://jsonplaceholder.typicode.com/posts";
-let postViaje = 100;
 
-$.post(URL,{title: postViaje,});}
+
+
+
+/////////////////////////// POST VIAJE //////////////////////
+function postViaje() {  
+
+var datos = {
+  "nombreOrigen" : JSON.parse(localStorage.getItem("nombreOrigen")),
+  "mailOrigen" : JSON.parse(localStorage.getItem("mailOrigen")),
+  "fechaOrigen" : JSON.parse(localStorage.getItem("fechaOrigen")),
+  "direccionOrigen" : JSON.parse(localStorage.getItem("direccionOrigen")),
+  "cpOrigen" : JSON.parse(localStorage.getItem("cpOrigen")),
+  "nombreDestino" : JSON.parse(localStorage.getItem("nombreDestino")),
+  "nombreDestino" : JSON.parse(localStorage.getItem("nombreDestino")),
+  "fechaDestino" : JSON.parse(localStorage.getItem("fechaDestino")),
+  "direccionDestino" : JSON.parse(localStorage.getItem("direccionDestino")),
+  "cpDestino" : JSON.parse(localStorage.getItem("cpDestino")),
+};
+
+var url = "https://jsonplaceholder.typicode.com/posts"; // URL a la cual enviar los datos
+
+enviarDatos(datos, url); // Ejecutar cuando se quiera enviar los datos
+
+function enviarDatos(datos, url){
+  $.ajax({
+          data: datos,
+          url: url,
+          type: 'post',
+          success:  function (response) {
+              //console.log(response); // Imprimir respuesta del archivo
+              $(informePost).append(`
+              <div class="alert alert-success text-center" role="alert">
+                  <strong>Bien hecho!</strong> Pedido Nro: ${response.id}.
+              </div>
+              `);
+          },
+          error: function (error) {
+              console.log(error); // Imprimir respuesta de error
+          }
+  });
+}
+}
