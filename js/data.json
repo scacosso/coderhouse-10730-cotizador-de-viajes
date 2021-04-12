@@ -8,7 +8,7 @@
     "capacidadKgMax": 2000,
     "precioPallet": 1000,
     "precioKm": 80,
-    "imagen":"/img/1.jpg"
+    "imagen":"img/1.jpg"
   }, {
     "id": 2,
     "tipoVehiculo": "Camioneta",
@@ -19,7 +19,7 @@
     "capacidadKgMax": 6000,
     "precioPallet": 1500,
     "precioKm": 100,
-    "imagen":"/img/2.jpg"
+    "imagen":"img/2.jpg"
   },{
     "id": 3,
     "tipoVehiculo": "Camion",
@@ -30,7 +30,7 @@
     "capacidadKgMax": 10000,
     "precioPallet": 2000,
     "precioKm": 120,
-    "imagen":"/img/3.jpg"
+    "imagen":"img/3.jpg"
   },{
     "id": 4,
     "tipoVehiculo": "Camion",
@@ -41,5 +41,5 @@
     "capacidadKgMax": 15000,
     "precioPallet": 2500,
     "precioKm": 150,
-    "imagen":"/img/4.jpg"
+    "imagen":"img/4.jpg"
   }]
