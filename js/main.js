@@ -121,13 +121,11 @@ function muestraVehiculo(pallet,kg) {
           <h2 class="text-center text-secondary">Vehiculo Ofrecido</h2>
           <div>
           <div class="row no-gutters">
-            <div class="col-10 col-md-6">
-              <img class="w-100 h-auto img-responsive center-block" src="${imagen}" alt="${tipoVehic} ${tamanio}">
+            <div class="col-10 col-md-6 text-center">
+              <img class="w-80 h-auto img-responsive center-block" src="${imagen}" alt="${tipoVehic} ${tamanio}">
               <h5 class="text-center">${tipoVehic} ${tamanio}</h5>
-              <div class="text-center">                
-              <img class="col-6 mb-5" src="${url}" alt="Patente ${patente}">
-              </div>
-              </div>
+              <img class="patente" src="${url}" alt="Patente ${patente}">
+            </div>
             <div class="col-10 col-md-6">
               <div class="card-body">
                 <p>Hola <b>${nombre}</b>.</p>
