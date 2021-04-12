@@ -1,0 +1,39 @@
+/* Seteos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    text-decoration: none;
+    text-decoration-color:aliceblue ;
+  }
+
+body {
+    overflow-x: hidden;
+    min-height: 100vh;
+    background: #C6FFDD;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+
+.logo {
+    max-width: 250px;
+}   
+
+div {
+    align-items: center;
+    justify-content: center;
+}
+
+.footer {
+    background-color: #f7797d;
+    margin-top: 50px;
+    text-align: center;
+    color: aliceblue;
+}
+
+#gracias img {
+    width: 100px;
+    margin: 100px;
+}

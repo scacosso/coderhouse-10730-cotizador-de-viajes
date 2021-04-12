@@ -1,0 +1,45 @@
+[{
+    "id": 1,
+    "tipoVehiculo": "Camioneta",
+    "tamanio": "Chica",
+    "patente": "gvd347",
+    "capacidadPalletMin":0,
+    "capacidadPalletMax":2,
+    "capacidadKgMax": 2000,
+    "precioPallet": 1000,
+    "precioKm": 80,
+    "imagen":"/img/1.jpg"
+  }, {
+    "id": 2,
+    "tipoVehiculo": "Camioneta",
+    "tamanio": "Grande",
+    "patente": "DE123EF",
+    "capacidadPalletMin":2,
+    "capacidadPalletMax":4,
+    "capacidadKgMax": 6000,
+    "precioPallet": 1500,
+    "precioKm": 100,
+    "imagen":"/img/2.jpg"
+  },{
+    "id": 3,
+    "tipoVehiculo": "Camion",
+    "tamanio": "Chico",
+    "patente": "GH123JK",
+    "capacidadPalletMin":4,
+    "capacidadPalletMax":6,
+    "capacidadKgMax": 10000,
+    "precioPallet": 2000,
+    "precioKm": 120,
+    "imagen":"/img/3.jpg"
+  },{
+    "id": 4,
+    "tipoVehiculo": "Camion",
+    "tamanio": "Grande",
+    "patente": "FGU354",
+    "capacidadPalletMin":6,
+    "capacidadPalletMax":8,
+    "capacidadKgMax": 15000,
+    "precioPallet": 2500,
+    "precioKm": 150,
+    "imagen":"/img/4.jpg"
+  }]
