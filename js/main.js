@@ -1,3 +1,4 @@
+moment.locale('es');
 //////////////////////////////////////////// PASO 1 - FORMULARIO ORIGEN /////////////////////////////////
 $(document).ready(function () {
     $("#formularioOrigen").show(1000);
@@ -9,21 +10,20 @@ $(document).ready(function () {
 
 });
 
-
 $("#formularioOrigen").append(
   `
       <div class="card shadow-sm">
       <div class="card-body">
         <h2 class="text-center text-secondary">Origen del Viaje</h2>
         <div>
-          <form class="row justify-content-center" id="formulario">
-              <input id="nombreOrigen" type="text" class="form-control col-5 m-2" placeholder="Nombre y Apellido">
-              <input id="mailOrigen" type="mail" class="form-control col-5 m-2" placeholder="Email">
-              <input id="pallet" type="text" class="form-control col-5 m-2" placeholder="Cantidad de pallets">
-              <input id="kg" type="text" class="form-control col-5 m-2" placeholder="Kg totales">
-              <input id="fechaOrigen" type="date" class="form-control col-10 m-2" placeholder="Fecha de traslado">
-              <input id="direccionOrigen" type="text" class="form-control col-7 m-2" placeholder="Direccion Origen">
-              <input id="cpOrigen" type="text" class="form-control col-3 m-2" placeholder="CP de Origen">
+          <form class="row justify-content-center" id="forigen">
+              <input id="nombreOrigen" name="nombreOrigen" type="text" class="form-control col-5 m-2" placeholder="Nombre y Apellido">
+              <input id="mailOrigen" name="mailOrigen" type="mail" class="form-control col-5 m-2" placeholder="Email">
+              <input id="pallet" name="pallet" type="text" class="form-control col-5 m-2" placeholder="Cantidad de pallets">
+              <input id="kg" name="kg" type="text" class="form-control col-5 m-2" placeholder="Kg totales">
+              <input id="fechaOrigen" name="fechaOrigen" type="date" class="form-control col-10 m-2" placeholder="Fecha de traslado">
+              <input id="direccionOrigen" name="direccionOrigen" type="text" class="form-control col-7 m-2" placeholder="Direccion Origen">
+              <input id="cpOrigen" name="cpOrigen" type="text" class="form-control col-3 m-2" placeholder="CP de Origen">
               <button id="botonADestino" class="btn btn-primary text-center shadow rounded-pill col-5 mt-4">Siguiente</button>
           </form>
         </div>
@@ -57,7 +57,7 @@ $("#formularioDestino").append(
       <div class="card-body">
         <h2 class="text-center text-secondary">Destino del Viaje</h2>
         <div>
-          <form class="row justify-content-center" id="formulario">
+          <form class="row justify-content-center" id="fdestino">
               <input id="nombreDestino" type="text" class="form-control col-5 m-2" placeholder="Nombre y Apellido">
               <input id="mailDestino" type="mail" class="form-control col-5 m-2" placeholder="Email">
               <input id="fechaDestino" type="date" class="form-control col-10 m-2" placeholder="Fecha de traslado">
@@ -343,11 +343,6 @@ function getDistanciaMetros(lat1,lon1,lat2,lon2){
  
 }
 
-
-
-
-
-
 /////////////////////////// POST VIAJE //////////////////////
 function postViaje() {  
 
@@ -369,21 +364,29 @@ var url = "https://jsonplaceholder.typicode.com/posts"; // URL a la cual enviar 
 enviarDatos(datos, url); // Ejecutar cuando se quiera enviar los datos
 
 function enviarDatos(datos, url){
-  $.ajax({
+    let dias = JSON.parse(localStorage.getItem("diasAlmacenado"));
+    function fechaEntrega(dias) {
+      let fechaEntrega = moment().add(dias, 'days').calendar();
+      localStorage.setItem("fechaEntrega",JSON.stringify(fechaEntrega));
+      return JSON.parse(localStorage.getItem("fechaEntrega"));
+    }
+
+    $.ajax({
           data: datos,
           url: url,
           type: 'post',
           success:  function (response) {
               $(informePost).append(`
               <div class="alert alert-success text-center" role="alert">
-                  <strong>Bien hecho!</strong> Pedido Nro: ${response.id}.
+                  <strong>Bien hecho!</strong> Pedido Nro: <b>${response.id}</b>
+                  <br>Se entregará: <b>${fechaEntrega(dias)}</b>.
               </div>
               `);
           },
           error: function (error) {
             $(informePost).append(`
             <div class="alert alert-danger text-center" role="alert">
-                <strong>Bien hecho!</strong> Pedido Nro: ${response.id}.
+                <strong>Bien hecho!</strong> Error Nro: ${response.id}. Su pedido no pudo ser procesado.
             </div>
             `);    
           }
@@ -391,7 +394,7 @@ function enviarDatos(datos, url){
 }
 }
 
-
+/////////////////////////// CALCULA DIAS ALMACENADO //////////////////////
 function diasAlmacenado() {
   let fecha1 = moment(JSON.parse(localStorage.getItem("fechaOrigen")));
   let fecha2 = moment(JSON.parse(localStorage.getItem("fechaDestino")));
