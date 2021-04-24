@@ -39,6 +39,8 @@ $("#botonADestino").click(function(event) {
       $("#mostrarVehiculo").hide(0);
       $("#presupuesto").hide(0);
       $("#gracias").hide(0);
+  
+      //console.log(event);
 
   // ENVIO DATOS DE FORMULARIO A STORAGE // 
       localStorage.setItem("nombreOrigen",JSON.stringify($("#nombreOrigen").val()));
@@ -63,13 +65,23 @@ $("#formularioDestino").append(
               <input id="fechaDestino" type="date" class="form-control col-10 m-2" placeholder="Fecha de traslado">
               <input id="direccionDestino" type="text" class="form-control col-5 m-2" placeholder="Direcion Destino">
               <input id="cpDestino" type="text" class="form-control col-5 m-2" placeholder="CP de Destino">
-              <button id="botonVolver" class="btn btn-danger text-center shadow rounded-pill col-5 m-2">Volver</button>
+              <button id="volverAOrigen" class="btn btn-danger text-center shadow rounded-pill col-5 m-2">Volver</button>
               <button id="botonAVehiculo" class="btn btn-primary text-center shadow rounded-pill col-5 m-2">Consultar</button>
           </form>
         </div>
       </div>
       </div>
 `);
+
+/// BOTON VOLVER A FORMULARIO DE ORIGEN ///
+$("#volverAOrigen").click(function(event) {
+  event.preventDefault();
+      $("#formularioOrigen").show(1000);
+      $("#formularioDestino").hide(0);
+      $("#mostrarVehiculo").hide(0);
+      $("#presupuesto").hide(0);
+      $("#gracias").hide(0);
+});
 
 //////////////////////////////////////////// PASO 3 - MUESTRA VEHICULO /////////////////////////////////
 $("#botonAVehiculo").click(function(event) {
@@ -79,6 +91,8 @@ $("#botonAVehiculo").click(function(event) {
       $("#mostrarVehiculo").show(1000);
       $("#presupuesto").hide(0);
       $("#gracias").hide(0);
+
+      console.log(event);
 
     // ENVIO DATOS DE FORMULARIO A STORAGE // 
       localStorage.setItem("nombreDestino",JSON.stringify($("#nombreDestino").val()));
@@ -91,6 +105,8 @@ $("#botonAVehiculo").click(function(event) {
       guardaCoorCP2(cp2);
       muestraVehiculo(pallet, kg);
 });
+
+
 
 // muestra vehiculo funciona ////////
 
@@ -137,7 +153,7 @@ function muestraVehiculo(pallet,kg) {
               </div>
             </div>
             <div class="col-12 text-center">
-                <button id="botonVolver" class="btn btn-danger text-center shadow rounded-pill col-5 m-2">Volver</button>
+                <button id="volverADestino" class="btn btn-danger text-center shadow rounded-pill col-5 m-2">Volver</button>
                 <button id="botonContratar" type="button" class="btn btn-primary text-center shadow rounded-pill col-5 m-2">Siguiente</button>
             </div>
           </div>
@@ -180,6 +196,17 @@ function muestraVehiculo(pallet,kg) {
             diasAlmacenado()
             muestraPresupuesto();
       });
+
+      /// BOTON VOLVER A FORMULARIO DE DESTINO ///
+      $("#volverADestino").click(function(event) {
+        event.preventDefault();
+            $("#formularioOrigen").hide(0);
+            $("#formularioDestino").show(1000);
+            $("#mostrarVehiculo").hide(0);
+            $("#presupuesto").hide(0);
+            $("#gracias").hide(0);
+      });
+
   })};
 
 
@@ -217,36 +244,47 @@ $("#presupuesto").html(
       <th scope="row">Pallet</th>
       <td>${pallet}</td>
       <td>${precioPallet}</td>
-      <td>$${pallet*precioPallet}</td>
+      <td>$${(pallet*precioPallet).toFixed(2)}</td>
     </tr>
     <tr>
       <th scope="row">Kms</th>
       <td>${km}</td>
       <td>${precioKm}</td>
-      <td>$${km*precioKm}</td>
+      <td>$${(km*precioKm).toFixed(2)}</td>
     </tr>
     <tr>
       <th scope="row">Dias Almacenado<br> por pallet</th>
       <td>${dias}</td>
       <td>${1000}</td>
-      <td>$${dias*1000*pallet}</td>
+      <td>$${(dias*1000*pallet).toFixed(2)}</td>
     </tr>
     <tr>
     <th scope="row">TOTAL</th>
     <td></td>
     <td></td>
-    <td><b>$${km*precioKm+pallet*precioPallet+dias*1000*pallet}</b></td>
+    <td><b>$${(km*precioKm+pallet*precioPallet+dias*1000*pallet).toFixed(2)}</b></td>
   </tr>
   </tbody>
 </table>
   </div>
   <div class="col-12 text-center">
-        <button id="botonVolver" class="btn btn-danger text-center shadow rounded-pill col-5 m-2">Volver</button>
+        <button id="volverAVehiculo" class="btn btn-danger text-center shadow rounded-pill col-5 m-2">Volver</button>
         <button id="botonConfirmado" type="button" class="btn btn-success text-center shadow rounded-pill col-5 m-2">Contratar</button>
     </div>
 </div>
 </div>
 `);
+
+      /// BOTON VOLVER A FORMULARIO DE DESTINO ///
+      $("#volverAVehiculo").click(function(event) {
+        event.preventDefault();
+            $("#formularioOrigen").hide(0);
+            $("#formularioDestino").hide(0);
+            $("#mostrarVehiculo").show(1000);
+            $("#presupuesto").hide(0);
+            $("#gracias").hide(0);
+      });
+
 
 $("#botonConfirmado").click(function(event) {
   event.preventDefault();
@@ -258,6 +296,8 @@ $("#botonConfirmado").click(function(event) {
       postViaje();
 });
 }
+
+
 
 //////////////////////////////////////////// PASO 5 - FORMULARIO ORIGEN /////////////////////////////////
 
